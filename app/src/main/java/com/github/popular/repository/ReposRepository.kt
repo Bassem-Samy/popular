@@ -1,6 +1,6 @@
 package com.github.popular.repository
 
-import com.github.popular.domain.Repository
+import com.github.popular.domain.model.Repository
 import io.reactivex.Single
 
 interface ReposRepository {

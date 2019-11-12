@@ -1,6 +1,7 @@
 package com.github.popular.ui.listing
 
-import android.util.Log
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.github.popular.domain.usecase.PopularListingUseCase
 import com.github.popular.domain.usecase.PopularReposPageRequest
@@ -15,7 +16,8 @@ class PopularListingViewModel(
     private val networkScheduler: Scheduler
 ) : ViewModel() {
     private val compositeDisposable = CompositeDisposable()
-
+    private val mutableLiveData: MutableLiveData<States> = MutableLiveData()
+    val liveData: LiveData<States> get() = mutableLiveData
     fun send(event: Events) {
         when (event) {
             is Events.OnAttach -> onAttach(event.pageSize)
@@ -34,9 +36,18 @@ class PopularListingViewModel(
             .subscribeOn(networkScheduler)
             .observeOn(mainScheduler)
             .subscribe({ items ->
-                Log.e("result", items.toString())
+                mutableLiveData.postValue(States.PopularItems(items.map {
+                    PopularRepoListItem(
+                        id = it.id,
+                        name = it.name,
+                        owner = it.owner,
+                        starsCount = it.starsCount,
+                        ownerAvatar = it.ownerAvatar,
+                        description = it.description
+                    )
+                }))
             }, { throwable ->
-                Log.e("result", throwable.message)
+                mutableLiveData.postValue(States.Error)
             })
             .addTo(compositeDisposable)
     }
@@ -49,5 +60,8 @@ class PopularListingViewModel(
         data class OnAttach(val pageSize: Int) : PopularListingViewModel.Events()
     }
 
-    sealed class Messages {}
+    sealed class States {
+        object Error : States()
+        data class PopularItems(val items: List<PopularRepoListItem>) : States()
+    }
 }

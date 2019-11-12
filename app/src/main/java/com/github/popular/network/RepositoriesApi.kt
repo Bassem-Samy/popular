@@ -19,6 +19,15 @@ data class PopularRepositoriesResponse(
     @SerializedName("items") val items: List<ApiRepository>
 ) {
     data class ApiRepository(
-        @SerializedName("id") val id: String
-    )
+        @SerializedName("id") val id: String,
+        @SerializedName("name") val name: String,
+        @SerializedName("description") val description: String?,
+        @SerializedName("stargazers_count") val starsCount: Int,
+        @SerializedName("owner") val owner: ApiRepositoryOwner
+    ) {
+        data class ApiRepositoryOwner(
+            @SerializedName("login") val loginName: String,
+            @SerializedName("avatar_url") val avatarUrl: String
+        )
+    }
 }

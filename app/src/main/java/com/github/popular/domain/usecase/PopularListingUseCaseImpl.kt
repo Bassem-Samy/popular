@@ -1,7 +1,6 @@
 package com.github.popular.domain.usecase
 
-import com.github.popular.domain.Repository
-import com.github.popular.network.PopularRepositoriesResponse
+import com.github.popular.domain.model.Repository
 import com.github.popular.repository.ReposRepository
 import io.reactivex.Single
 

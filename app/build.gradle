@@ -47,6 +47,7 @@ dependencies {
     implementation Libs.card_view
 
     implementation Libs.glide
+    implementation Libs.arrow_core_data
 
 
     testImplementation Libs.arch_components_test
