@@ -1,4 +1,4 @@
-package com.github.popular.usecase
+package com.github.popular.domain.usecase
 
 import com.github.popular.domain.Repository
 import io.reactivex.Single

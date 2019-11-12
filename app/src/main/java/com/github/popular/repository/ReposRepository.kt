@@ -3,7 +3,7 @@ package com.github.popular.repository
 import com.github.popular.domain.Repository
 import io.reactivex.Single
 
-interface PopularReposRepository {
+interface ReposRepository {
     data class RepositoryPageRequest(
         val keyword: String,
         val page: Int,
@@ -15,5 +15,5 @@ interface PopularReposRepository {
         object Stars : SortParams()
     }
 
-    fun getPopularRepositories(pageRequest: RepositoryPageRequest): Single<List<Repository>>
+    fun getRepositories(pageRequest: RepositoryPageRequest): Single<List<Repository>>
 }
