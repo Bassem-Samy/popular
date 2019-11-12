@@ -1,0 +1,1 @@
+/Users/mab/Documents/Bassoum/2019/tech/github/popular/buildSrc/build/classes/kotlin/main/Libs.class:/Users/mab/Documents/Bassoum/2019/tech/github/popular/buildSrc/build/classes/kotlin/main/Versions.class
