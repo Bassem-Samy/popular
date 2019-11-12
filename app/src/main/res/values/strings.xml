@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Popular</string>
+    <string name="owner_prefix">By:</string>
+    <string name="stars_prefix">Stars:</string>
 </resources>

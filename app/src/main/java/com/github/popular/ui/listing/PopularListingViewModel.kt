@@ -62,6 +62,7 @@ class PopularListingViewModel(
 
     sealed class States {
         object Error : States()
+        object Loading:States()
         data class PopularItems(val items: List<PopularRepoListItem>) : States()
     }
 }

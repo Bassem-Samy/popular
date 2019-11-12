@@ -6,12 +6,17 @@ import com.github.popular.repository.ReposRepository
 import com.github.popular.repository.ReposRepositoryImpl
 import com.github.popular.repository.RepositoryDomainMapper
 import com.github.popular.ui.listing.PopularListingViewModel
+import com.github.popular.utils.GlideImageLoader
+import com.github.popular.utils.ImageLoader
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
 val appModule = module {
+    single<ImageLoader> {
+        GlideImageLoader()
+    }
     single { RepositoryDomainMapper() }
     single<ReposRepository> {
         ReposRepositoryImpl(
