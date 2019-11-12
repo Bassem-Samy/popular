@@ -9,6 +9,7 @@ import com.github.popular.utils.exhaustive
 import io.reactivex.Scheduler
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.addTo
+import java.util.concurrent.TimeUnit
 
 class PopularListingViewModel(
     private val popularListingUseCase: PopularListingUseCase,
@@ -20,11 +21,17 @@ class PopularListingViewModel(
     val liveData: LiveData<States> get() = mutableLiveData
     fun send(event: Events) {
         when (event) {
-            is Events.OnAttach -> onAttach(event.pageSize)
+            is Events.OnAttach -> onAttach(event.pageSize, event.refreshMillis)
         }.exhaustive
     }
 
-    private fun onAttach(pageSize: Int) {
+    private fun onAttach(pageSize: Int, refreshMillis: MilliSeconds) {
+        mutableLiveData.postValue(States.Loading)
+
+        refreshPopularItems(pageSize, refreshMillis)
+    }
+
+    private fun refreshPopularItems(pageSize: Int, refreshMillis: MilliSeconds) {
         disposeRequests()
         popularListingUseCase.getPopularRepos(
             PopularReposPageRequest(
@@ -35,6 +42,8 @@ class PopularListingViewModel(
         )
             .subscribeOn(networkScheduler)
             .observeOn(mainScheduler)
+            .repeatWhen { completed -> completed.delay(refreshMillis, TimeUnit.MILLISECONDS) }
+            .retryWhen { failed -> failed.delay(refreshMillis, TimeUnit.MILLISECONDS) }
             .subscribe({ items ->
                 mutableLiveData.postValue(States.PopularItems(items.map {
                     PopularRepoListItem(
@@ -46,7 +55,7 @@ class PopularListingViewModel(
                         description = it.description
                     )
                 }))
-            }, { throwable ->
+            }, {
                 mutableLiveData.postValue(States.Error)
             })
             .addTo(compositeDisposable)
@@ -56,13 +65,21 @@ class PopularListingViewModel(
         compositeDisposable.clear()
     }
 
+    override fun onCleared() {
+        super.onCleared()
+        disposeRequests()
+    }
+
     sealed class Events {
-        data class OnAttach(val pageSize: Int) : PopularListingViewModel.Events()
+
+        data class OnAttach(val pageSize: Int, val refreshMillis: MilliSeconds) : PopularListingViewModel.Events()
     }
 
     sealed class States {
         object Error : States()
-        object Loading:States()
+        object Loading : States()
         data class PopularItems(val items: List<PopularRepoListItem>) : States()
     }
+
 }
+typealias MilliSeconds = Long

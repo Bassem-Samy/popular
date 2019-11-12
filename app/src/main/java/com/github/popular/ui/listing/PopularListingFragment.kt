@@ -46,7 +46,7 @@ class PopularListingFragment : Fragment() {
                 is PopularListingViewModel.States.PopularItems -> displayPopularItems(state.items)
             }.exhaustive
         })
-        viewModel.send(PopularListingViewModel.Events.OnAttach(PAGE_SIZE))
+        viewModel.send(PopularListingViewModel.Events.OnAttach(PAGE_SIZE, REFRESH_MILLIS))
     }
 
     private fun displayPopularItems(items: List<PopularRepoListItem>) {
@@ -83,6 +83,7 @@ class PopularListingFragment : Fragment() {
     companion object {
         const val TAG = "popular_listing_fragment"
         private const val PAGE_SIZE = 20
+        private const val REFRESH_MILLIS: MilliSeconds = 5000
         @JvmStatic
         fun newInstance() = PopularListingFragment()
     }
