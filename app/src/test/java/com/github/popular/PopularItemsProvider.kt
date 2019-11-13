@@ -14,7 +14,10 @@ object PopularItemsProvider {
                 name = "one",
                 owner = "owner one",
                 starsCount = 1,
+                forksCount = 213,
+                openIssuesCount = 100,
                 ownerAvatar = "avatar",
+                language = "Kotlin".some(),
                 description = "some description".some()
             ),
             Repository(
@@ -22,7 +25,10 @@ object PopularItemsProvider {
                 name = "two",
                 owner = "owner 2",
                 starsCount = 2123,
+                forksCount = 2,
+                openIssuesCount = 3,
                 ownerAvatar = "avatar2",
+                language = Option.empty(),
                 description = "some description2".some()
             ),
             Repository(
@@ -30,7 +36,10 @@ object PopularItemsProvider {
                 name = "three",
                 owner = "owner 3",
                 starsCount = 111,
+                forksCount = 33,
+                openIssuesCount = 210,
                 ownerAvatar = "avatar3",
+                language = "Java".some(),
                 description = Option.empty()
             )
         )

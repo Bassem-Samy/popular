@@ -11,8 +11,11 @@ class RepositoryDomainMapper {
             name = apiRepository.name,
             owner = apiRepository.owner.loginName,
             starsCount = apiRepository.starsCount,
+            forksCount = apiRepository.forksCount,
+            openIssuesCount = apiRepository.openIssuesCount,
             ownerAvatar = apiRepository.owner.avatarUrl,
-            description = Option.fromNullable(apiRepository.description)
+            description = Option.fromNullable(apiRepository.description),
+            language = Option.fromNullable(apiRepository.language)
         )
     }
 }
