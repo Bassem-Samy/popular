@@ -3,9 +3,9 @@ package com.github.popular.ui.listing
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.appcompat.widget.AppCompatTextView
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.github.popular.R
 
@@ -29,9 +29,11 @@ class PopularRepoAdapter(private val onItemClicked: (PopularRepoListItem) -> Uni
     }
 
     fun setItems(newItems: List<PopularRepoListItem>) {
-        this.items.clear()
-        this.items.addAll(newItems)
-        this.notifyDataSetChanged()
+        val diffCallback = PopularRepoDiffCallback(items, newItems)
+        val diffResult = DiffUtil.calculateDiff(diffCallback)
+        items.clear()
+        items.addAll(newItems)
+        diffResult.dispatchUpdatesTo(this)
     }
 
     class ViewHolder(view: View, private val imageLoader: ImageLoader, onItemClicked: (Int) -> Unit) : RecyclerView.ViewHolder(view) {
