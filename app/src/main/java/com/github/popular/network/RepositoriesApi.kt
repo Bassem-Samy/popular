@@ -3,6 +3,7 @@ package com.github.popular.network
 import com.google.gson.annotations.SerializedName
 import io.reactivex.Single
 import retrofit2.http.GET
+import retrofit2.http.Headers
 import retrofit2.http.Path
 import retrofit2.http.Query
 
@@ -15,6 +16,7 @@ interface RepositoriesApi {
         @Query("sort") sort: String
     ): Single<PopularRepositoriesResponse>
 
+    //@Headers("Authorization: token ADD_YOUR_ACCESS_TOKEN_HERE")
     @GET("repositories/{id}")
     fun getRepositoryDetailsById(@Path("id") id: String): Single<PopularRepositoriesResponse.ApiRepository>
 }
