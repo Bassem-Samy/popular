@@ -2,4 +2,9 @@
     <string name="app_name">Popular</string>
     <string name="owner_prefix">By:</string>
     <string name="stars_prefix">Stars:</string>
+    <string name="detail_owner_by">by:</string>
+    <string name="detail_stars_prefix">Stars:</string>
+    <string name="detail_forks_prefix">Forks:</string>
+    <string name="detail_issues_prefix">Open Issues:</string>
+    <string name="detail_language_prefix">Language:</string>
 </resources>

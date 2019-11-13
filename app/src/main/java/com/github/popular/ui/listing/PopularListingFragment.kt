@@ -78,7 +78,11 @@ class PopularListingFragment : Fragment() {
     }
 
     interface OnFragmentInteractionListener {
-        fun onRepoClicked()
+        fun onRepoClicked(repositoryId:String)
+    }
+
+    private fun onPopularItemClicked(popularRepoListItem: PopularRepoListItem) {
+        listener?.onRepoClicked(popularRepoListItem.id)
     }
 
     companion object {
@@ -90,6 +94,4 @@ class PopularListingFragment : Fragment() {
     }
 }
 
-fun onPopularItemClicked(popularRepoListItem: PopularRepoListItem) {
 
-}

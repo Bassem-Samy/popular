@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorMainBackground"
+    android:clickable="true"
+    android:focusable="true"
+    tools:context=".ui.details.RepositoryDetailFragment">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/detail_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:animateLayoutChanges="true"
+            android:padding="@dimen/padding_default"
+            android:visibility="gone"
+            tools:visibility="visible">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/detail_image"
+                android:layout_width="@dimen/detail_repository_image_width"
+                android:layout_height="@dimen/detail_repository_image_height"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:src="@drawable/ic_launcher_background" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/detail_name"
+                style="@style/TextAppearance.AppCompat.Headline"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_default"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/detail_image"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="My Repository Header" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/detail_owner_prefix"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/detail_owner_by"
+                app:layout_constraintStart_toStartOf="@id/detail_name"
+                app:layout_constraintTop_toBottomOf="@id/detail_name" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/detail_owner_name"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_space"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/detail_owner_prefix"
+                app:layout_constraintTop_toTopOf="@id/detail_owner_prefix"
+                tools:text="GDG" />
+
+            <androidx.constraintlayout.widget.Barrier
+                android:id="@+id/owner_barrier"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:barrierDirection="bottom"
+                app:constraint_referenced_ids="detail_owner_name,detail_owner_prefix" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/detail_stars_prefix"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/detail_stars_prefix"
+                app:layout_constraintStart_toStartOf="@id/detail_name"
+                app:layout_constraintTop_toBottomOf="@id/owner_barrier" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/detail_stars_count"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_space"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/detail_stars_prefix"
+                app:layout_constraintTop_toBottomOf="@id/owner_barrier"
+                tools:text="1023" />
+
+            <androidx.constraintlayout.widget.Barrier
+                android:id="@+id/stars_barrier"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:barrierDirection="bottom"
+                app:constraint_referenced_ids="detail_stars_count,detail_stars_prefix" />
+
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/detail_forks_prefix"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/detail_forks_prefix"
+                app:layout_constraintStart_toStartOf="@id/detail_name"
+                app:layout_constraintTop_toBottomOf="@id/stars_barrier" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/detail_forks_count"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_space"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/detail_forks_prefix"
+                app:layout_constraintTop_toBottomOf="@id/stars_barrier"
+                tools:text="31" />
+
+            <androidx.constraintlayout.widget.Barrier
+                android:id="@+id/forks_barrier"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:barrierDirection="bottom"
+                app:constraint_referenced_ids="detail_forks_count,detail_forks_prefix" />
+
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/detail_issues_prefix"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/detail_issues_prefix"
+                app:layout_constraintStart_toStartOf="@id/detail_name"
+                app:layout_constraintTop_toBottomOf="@id/forks_barrier" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/detail_issues_count"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_space"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/detail_issues_prefix"
+                app:layout_constraintTop_toBottomOf="@id/forks_barrier"
+                tools:text="9" />
+
+            <androidx.constraintlayout.widget.Barrier
+                android:id="@+id/issues_barrier"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:barrierDirection="bottom"
+                app:constraint_referenced_ids="detail_issues_count,detail_issues_prefix" />
+
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/detail_language_prefix"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/detail_language_prefix"
+                app:layout_constraintStart_toStartOf="@id/detail_name"
+                app:layout_constraintTop_toBottomOf="@id/issues_barrier" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/detail_language"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_space"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/detail_language_prefix"
+                app:layout_constraintTop_toBottomOf="@id/issues_barrier"
+                tools:text="Kotlin" />
+
+            <androidx.constraintlayout.widget.Barrier
+                android:id="@+id/details_barrier"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:barrierDirection="bottom"
+                app:constraint_referenced_ids="detail_language,detail_image" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/detail_description"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/details_barrier"
+                tools:text="some description for the repository" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+
+    <ProgressBar
+        android:id="@+id/detail_progress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center" />
+
+</FrameLayout>
+
