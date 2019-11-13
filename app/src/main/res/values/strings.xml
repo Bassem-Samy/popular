@@ -7,4 +7,5 @@
     <string name="detail_forks_prefix">Forks:</string>
     <string name="detail_issues_prefix">Open Issues:</string>
     <string name="detail_language_prefix">Language:</string>
+    <string name="general_error">An error has happened, please try again later</string>
 </resources>

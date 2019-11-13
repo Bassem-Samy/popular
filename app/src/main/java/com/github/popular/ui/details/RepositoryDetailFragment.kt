@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ProgressBar
+import android.widget.Toast
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.lifecycle.Observer
@@ -108,6 +109,7 @@ class RepositoryDetailFragment : Fragment() {
     private fun showError() {
         detailProgress.visibility = View.GONE
         detailView.visibility = View.GONE
+        Toast.makeText(context, R.string.general_error, Toast.LENGTH_SHORT).show()
     }
 
     companion object {
