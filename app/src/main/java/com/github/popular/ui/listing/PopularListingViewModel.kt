@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.github.popular.domain.usecase.PopularListingUseCase
 import com.github.popular.domain.usecase.PopularReposPageRequest
+import com.github.popular.utils.MilliSeconds
 import com.github.popular.utils.exhaustive
 import io.reactivex.Scheduler
 import io.reactivex.disposables.CompositeDisposable
@@ -89,4 +90,3 @@ class PopularListingViewModel(
     }
 
 }
-typealias MilliSeconds = Long

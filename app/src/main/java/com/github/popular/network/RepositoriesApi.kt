@@ -3,16 +3,20 @@ package com.github.popular.network
 import com.google.gson.annotations.SerializedName
 import io.reactivex.Single
 import retrofit2.http.GET
+import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface RepositoriesApi {
-    @GET("repositories")
+    @GET("search/repositories")
     fun getPopularRepos(
         @Query("q") keyWord: String,
         @Query("page") page: Int,
         @Query("per_page") pageSize: Int,
         @Query("sort") sort: String
     ): Single<PopularRepositoriesResponse>
+
+    @GET("repositories/{id}")
+    fun getRepositoryDetailsById(@Path("id") id: String): Single<PopularRepositoriesResponse.ApiRepository>
 }
 
 data class PopularRepositoriesResponse(

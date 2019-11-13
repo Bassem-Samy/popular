@@ -11,6 +11,7 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.github.popular.R
+import com.github.popular.utils.MilliSeconds
 import com.github.popular.utils.exhaustive
 import org.koin.android.ext.android.get
 import org.koin.androidx.viewmodel.ext.android.viewModel

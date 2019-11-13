@@ -16,4 +16,5 @@ interface ReposRepository {
     }
 
     fun getRepositories(pageRequest: RepositoryPageRequest): Single<List<Repository>>
+    fun getRepositoryById(id:String):Single<Repository>
 }
