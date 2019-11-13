@@ -26,14 +26,14 @@ class PopularListingViewModel(
     }
 
     private fun onAttach(pageSize: Int, refreshMillis: MilliSeconds) {
-        mutableLiveData.postValue(States.Loading)
+        mutableLiveData.value = States.Loading
 
         refreshPopularItems(pageSize, refreshMillis)
     }
 
     private fun refreshPopularItems(pageSize: Int, refreshMillis: MilliSeconds) {
         disposeRequests()
-        popularListingUseCase.getPopularRepos(
+        var floawable = popularListingUseCase.getPopularRepos(
             PopularReposPageRequest(
                 keyword = "Android",
                 page = 1,
@@ -41,10 +41,16 @@ class PopularListingViewModel(
             )
         )
             .subscribeOn(networkScheduler)
-            .observeOn(mainScheduler)
-            .repeatWhen { completed -> completed.delay(refreshMillis, TimeUnit.MILLISECONDS) }
-            .retryWhen { failed -> failed.delay(refreshMillis, TimeUnit.MILLISECONDS) }
-            .subscribe({ items ->
+            .observeOn(mainScheduler).toFlowable()
+
+        if (refreshMillis > 0) {
+            floawable = floawable
+                .repeatWhen { completed -> completed.delay(refreshMillis, TimeUnit.MILLISECONDS) }
+                .retryWhen { failed -> failed.delay(refreshMillis, TimeUnit.MILLISECONDS) }
+        }
+
+        floawable.subscribe(
+            { items ->
                 mutableLiveData.postValue(States.PopularItems(items.map {
                     PopularRepoListItem(
                         id = it.id,
@@ -55,7 +61,8 @@ class PopularListingViewModel(
                         description = it.description
                     )
                 }))
-            }, {
+            },
+            {
                 mutableLiveData.postValue(States.Error)
             })
             .addTo(compositeDisposable)
